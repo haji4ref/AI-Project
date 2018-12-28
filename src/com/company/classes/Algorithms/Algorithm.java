@@ -2,30 +2,31 @@ package com.company.classes.Algorithms;
 
 import com.company.classes.Graph;
 import com.company.classes.Node;
+import com.company.classes.Problems.Problem;
+import com.company.classes.Problems.State;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 abstract public class Algorithm {
-    protected Graph graph;
+    protected Problem problem;
 
-    protected Node start;
+    protected State start;
 
     protected int visitedNumber = 0;
 
     protected int extendedNodeNumber = 0;
 
-    protected LinkedList<Node> path;
+    protected Path path;
 
     protected int maxMemory;
 
     protected boolean graphSearch = false;
 
-    public Algorithm(Graph graph, Node start) {
-        this.graph = graph;
-        this.start = start;
-
-        this.path = new LinkedList<Node>();
-
+    public Algorithm(Problem problem, State state) {
+        this.problem = problem;
+        this.start = state;
+        this.path = new Path(new LinkedList<State>());
     }
 
     abstract public void execute();
@@ -38,8 +39,18 @@ abstract public class Algorithm {
         this.extendedNodeNumber++;
     }
 
-    public void addNodeToPath(Node node) {
-        this.path.add(node);
+    public void addNodeToPath(State state) {
+        this.path.add(state);
+    }
+
+    protected void prinPath() {
+        Iterator<State> iterator = this.path.listIterator();
+        int counter = 0;
+        while (iterator.hasNext()) {
+            System.out.print(counter + ".");
+            iterator.next().printValues();
+            counter++;
+        }
     }
 
     public void setMaxMemory(int maxMemory) {
