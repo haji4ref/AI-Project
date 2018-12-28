@@ -1,8 +1,8 @@
 package com.company;
 
 import com.company.classes.Algorithms.Algorithm;
-import com.company.classes.Algorithms.DFS;
-import com.company.classes.Algorithms.LDS;
+import com.company.classes.Algorithms.DLS;
+import com.company.classes.Algorithms.IDS;
 import com.company.classes.Graph;
 
 public class Main {
@@ -19,7 +19,7 @@ public class Main {
         graph.addEdge(6, 7);
 
 //        Algorithm algorithm = new BFS(graph, 0);
-        Algorithm algorithm = new LDS(graph, 0, 2);
+        Algorithm algorithm = new IDS(graph, 0);
 
         algorithm.execute();
     }

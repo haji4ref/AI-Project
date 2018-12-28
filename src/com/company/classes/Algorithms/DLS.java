@@ -4,10 +4,10 @@ import com.company.classes.Graph;
 
 import java.util.Iterator;
 
-public class LDS extends Algorithm {
+public class DLS extends Algorithm {
     private int limit;
 
-    public LDS(Graph graph, int start, int limit) {
+    public DLS(Graph graph, int start, int limit) {
         super(graph, start);
 
         this.setLimit(limit);
@@ -40,7 +40,6 @@ public class LDS extends Algorithm {
             if (!visited[n] && this.limit > currentDepth) {
                 DFSUtil(n, visited, currentDepth + 1);
             }
-
         }
     }
 }
