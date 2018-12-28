@@ -38,9 +38,10 @@ public class DLS extends Algorithm {
         Iterator<Node> i = this.graph.adj[v.getId()].listIterator();
         while (i.hasNext()) {
             Node n = i.next();
-            if (!visited[n.getId()] && this.limit > currentDepth) {
+            if (this.graphSearch && !visited[n.getId()] && this.limit > currentDepth) {
                 DFSUtil(n, visited, currentDepth + 1);
-            }
+            } else if (!this.graphSearch)
+                DFSUtil(n, visited, currentDepth + 1);
         }
     }
 }

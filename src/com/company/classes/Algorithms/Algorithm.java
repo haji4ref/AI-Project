@@ -18,6 +18,8 @@ abstract public class Algorithm {
 
     protected int maxMemory;
 
+    protected boolean graphSearch = false;
+
     public Algorithm(Graph graph, Node start) {
         this.graph = graph;
         this.start = start;
@@ -38,5 +40,17 @@ abstract public class Algorithm {
 
     public void addNodeToPath(int value) {
 
+    }
+
+    public Algorithm setGraphSearch(boolean value) {
+        this.graphSearch = value;
+
+        return this;
+    }
+
+    public Algorithm setGraphSearch() {
+        this.graphSearch = true;
+
+        return this;
     }
 }

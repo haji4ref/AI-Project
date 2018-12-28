@@ -30,7 +30,9 @@ public class DFS extends Algorithm {
         Iterator<Node> i = this.graph.adj[v.getId()].listIterator();
         while (i.hasNext()) {
             Node n = i.next();
-            if (!visited[n.getId()])
+            if (this.graphSearch && !visited[n.getId()])
+                DFSUtil(n, visited);
+            else if (!this.graphSearch)
                 DFSUtil(n, visited);
         }
     }

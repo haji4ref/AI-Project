@@ -8,8 +8,6 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 public class BFS extends Algorithm {
-
-
     public BFS(Graph graph, Node start) {
         super(graph, start);
     }
@@ -38,12 +36,14 @@ public class BFS extends Algorithm {
             ListIterator<Node> i = this.graph.adj[this.start.getId()].listIterator();
             while (i.hasNext()) {
                 Node n = i.next();
-                if (!visited[n.getId()]) {
+                if (this.graphSearch && !visited[n.getId()]) {
+                    visited[n.getId()] = true;
+                    queue.add(n);
+                } else if (!this.graphSearch) {
                     visited[n.getId()] = true;
                     queue.add(n);
                 }
             }
         }
-
     }
 }
