@@ -4,12 +4,22 @@ package com.company.classes.Problems;
 public class State {
     private String[] value;
 
+    private int cost = 1;
+
     public State(String[] value) {
         this.value = value;
     }
 
     public State(State state) {
         this.value = state.getValue().clone();
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public int length() {

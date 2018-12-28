@@ -2,6 +2,9 @@ package com.company.classes.Problems;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class FirstProblem extends Problem {
 
@@ -11,6 +14,7 @@ public class FirstProblem extends Problem {
     public FirstProblem() {
         this.setInitState();
         this.setActions();
+        this.finalState = new State(new String[]{"right", "right", "right", "right", "right"});
     }
 
     @Override
@@ -69,6 +73,21 @@ public class FirstProblem extends Problem {
         return result;
 
 
+    }
+
+
+    @Override
+    public boolean goalTest(State state) {
+        return Arrays.equals(state.getValue(), this.finalState.getValue());
+    }
+
+    @Override
+    public int pathCost(LinkedList<State> stateLinkedList) {
+        int cost = 0;
+        Iterator<State> stateIterator = stateLinkedList.listIterator();
+        while (stateIterator.hasNext())
+            cost += stateIterator.next().getCost();
+        return cost;
     }
 
     private int[] possiblePairsIndex(int index) {
