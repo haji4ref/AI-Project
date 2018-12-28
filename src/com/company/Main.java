@@ -1,25 +1,27 @@
 package com.company;
 
-import com.company.classes.Algorithms.Algorithm;
-import com.company.classes.Algorithms.DLS;
-import com.company.classes.Algorithms.IDS;
+import com.company.classes.Algorithms.*;
 import com.company.classes.Graph;
+import com.company.classes.MyNodeBuilder;
+import com.company.classes.Node;
 
 public class Main {
 
     public static void main(String[] args) {
         Graph graph = new Graph(8);
 
-        graph.addEdge(0, 1);
-        graph.addEdge(0, 2);
-        graph.addEdge(0, 3);
-        graph.addEdge(1, 4);
-        graph.addEdge(2, 5);
-        graph.addEdge(3, 6);
-        graph.addEdge(6, 7);
+        graph.addEdge(MyNodeBuilder.instance("0",1), MyNodeBuilder.instance("1",1));
+        graph.addEdge(MyNodeBuilder.instance("0",1), MyNodeBuilder.instance("2",1));
+        graph.addEdge(MyNodeBuilder.instance("0",1), MyNodeBuilder.instance("3",1));
+        graph.addEdge(MyNodeBuilder.instance("1",1), MyNodeBuilder.instance("4",1));
+        graph.addEdge(MyNodeBuilder.instance("2",1), MyNodeBuilder.instance("5",1));
+        graph.addEdge(MyNodeBuilder.instance("3",1), MyNodeBuilder.instance("6",1));
+        graph.addEdge(MyNodeBuilder.instance("6",1), MyNodeBuilder.instance("7",1));
 
-//        Algorithm algorithm = new BFS(graph, 0);
-        Algorithm algorithm = new IDS(graph, 0);
+        Node startNode = MyNodeBuilder.instance("0",1);
+
+        Algorithm algorithm = new IDS(graph,startNode);
+//        Algorithm algorithm = new IDS(graph, 0);
 
         algorithm.execute();
     }

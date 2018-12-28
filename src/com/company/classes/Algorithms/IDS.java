@@ -1,9 +1,10 @@
 package com.company.classes.Algorithms;
 
 import com.company.classes.Graph;
+import com.company.classes.Node;
 
 public class IDS extends Algorithm {
-    public IDS(Graph graph, int start) {
+    public IDS(Graph graph, Node start) {
         super(graph, start);
     }
 
@@ -14,6 +15,7 @@ public class IDS extends Algorithm {
         while (i < 4) {
             dls.execute();
             dls.setLimit(++i);
+            System.out.println();
         }
     }
 }

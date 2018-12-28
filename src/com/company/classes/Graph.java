@@ -11,10 +11,11 @@ public class Graph {
         this.V = v;
         this.adj = new LinkedList[v];
         for (int i = 0; i < v; ++i)
-            this.adj[i] = new LinkedList();
+            this.adj[i] = new LinkedList<Node>();
     }
+
     // Function to add an edge into the graph
-    public void addEdge(int v, int w) {
-        this.adj[v].add(w);
+    public void addEdge(Node v, Node w) {
+        this.adj[v.getId()].add(w);
     }
 }

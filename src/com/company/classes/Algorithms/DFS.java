@@ -1,11 +1,12 @@
 package com.company.classes.Algorithms;
 
 import com.company.classes.Graph;
+import com.company.classes.Node;
 
 import java.util.Iterator;
 
 public class DFS extends Algorithm {
-    public DFS(Graph graph, int start) {
+    public DFS(Graph graph, Node start) {
         super(graph, start);
     }
 
@@ -20,16 +21,16 @@ public class DFS extends Algorithm {
     }
 
     // A function used by DFS
-    private void DFSUtil(int v, boolean[] visited) {
+    private void DFSUtil(Node v, boolean[] visited) {
         // Mark the current node as visited and print it
-        visited[v] = true;
-        System.out.print(v + " ");
+        visited[v.getId()] = true;
+        System.out.print(v.getId() + " ");
 
         // Recur for all the vertices adjacent to this vertex
-        Iterator<Integer> i = this.graph.adj[v].listIterator();
+        Iterator<Node> i = this.graph.adj[v.getId()].listIterator();
         while (i.hasNext()) {
-            int n = i.next();
-            if (!visited[n])
+            Node n = i.next();
+            if (!visited[n.getId()])
                 DFSUtil(n, visited);
         }
     }

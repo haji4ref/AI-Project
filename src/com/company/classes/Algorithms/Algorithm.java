@@ -1,19 +1,42 @@
 package com.company.classes.Algorithms;
 
 import com.company.classes.Graph;
+import com.company.classes.Node;
 
-public class Algorithm implements AlgorithmInterface {
+import java.util.LinkedList;
+
+abstract public class Algorithm {
     protected Graph graph;
 
-    protected int start;
+    protected Node start;
 
-    public Algorithm(Graph graph,int start) {
+    protected int visitedNumber = 0;
+
+    protected int extendedNodeNumber = 0;
+
+    protected LinkedList path;
+
+    protected int maxMemory;
+
+    public Algorithm(Graph graph, Node start) {
         this.graph = graph;
         this.start = start;
+
+        this.path = new LinkedList();
+
     }
 
-    @Override
-    public void execute() {
+    abstract public void execute();
+
+    public void increamentVistedNumber() {
+        this.visitedNumber++;
+    }
+
+    public void addToExtendedNodeNumber(int value) {
+        this.extendedNodeNumber += value;
+    }
+
+    public void addNodeToPath(int value) {
 
     }
 }
