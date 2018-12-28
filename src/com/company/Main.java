@@ -38,11 +38,14 @@ public class Main {
 
         Problem problem = new FirstProblem();
 
-        ArrayList<State> states = problem.successors(
-                new Action("ada"),
-                problem.getInitState()
-        );
-        printList(states.listIterator());
+        Algorithm algorithm = new BFS(problem, problem.getInitState()).setGraphSearch();
+
+        algorithm.execute();
+//        ArrayList<State> states = problem.successors(
+//                new Action("ada"),
+//                problem.getInitState()
+//        );
+//        printList(states.listIterator());
     }
 
     public static void printList(Iterator<State> list) {

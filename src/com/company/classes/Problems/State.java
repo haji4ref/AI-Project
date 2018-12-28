@@ -44,5 +44,6 @@ public class State {
         for (String value : this.value) {
             System.out.print(value + " ");
         }
+        System.out.println();
     }
 }
