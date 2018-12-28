@@ -14,7 +14,7 @@ abstract public class Algorithm {
 
     protected int extendedNodeNumber = 0;
 
-    protected LinkedList path;
+    protected LinkedList<Node> path;
 
     protected int maxMemory;
 
@@ -24,22 +24,26 @@ abstract public class Algorithm {
         this.graph = graph;
         this.start = start;
 
-        this.path = new LinkedList();
+        this.path = new LinkedList<Node>();
 
     }
 
     abstract public void execute();
 
-    public void increamentVistedNumber() {
+    public void incrementVisitedNumber() {
         this.visitedNumber++;
     }
 
-    public void addToExtendedNodeNumber(int value) {
-        this.extendedNodeNumber += value;
+    public void incrementExtendedNumber() {
+        this.extendedNodeNumber++;
     }
 
-    public void addNodeToPath(int value) {
+    public void addNodeToPath(Node node) {
+        this.path.add(node);
+    }
 
+    public void setMaxMemory(int maxMemory) {
+        this.maxMemory = this.maxMemory > maxMemory ? this.maxMemory : maxMemory;
     }
 
     public Algorithm setGraphSearch(boolean value) {

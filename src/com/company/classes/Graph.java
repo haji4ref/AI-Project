@@ -18,4 +18,8 @@ public class Graph {
     public void addEdge(Node v, Node w) {
         this.adj[v.getId()].add(w);
     }
+
+    public LinkedList<Node> possibleStates(int id) {
+        return this.adj[id];
+    }
 }

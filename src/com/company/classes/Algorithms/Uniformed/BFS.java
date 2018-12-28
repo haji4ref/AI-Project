@@ -1,5 +1,6 @@
-package com.company.classes.Algorithms;
+package com.company.classes.Algorithms.Uniformed;
 
+import com.company.classes.Algorithms.Algorithm;
 import com.company.classes.Graph;
 import com.company.classes.Node;
 
@@ -30,12 +31,13 @@ public class BFS extends Algorithm {
             this.start = queue.poll();
             System.out.print(this.start.getId() + " ");
 
-            // Get all adjacent vertices of the dequeued vertex s
-            // If a adjacent has not been visited, then mark it
-            // visited and enqueue it
+            // extend the current node
             ListIterator<Node> i = this.graph.adj[this.start.getId()].listIterator();
+            this.incrementExtendedNumber();
             while (i.hasNext()) {
+                // visit the node
                 Node n = i.next();
+                this.incrementVisitedNumber();
                 if (this.graphSearch && !visited[n.getId()]) {
                     visited[n.getId()] = true;
                     queue.add(n);
@@ -43,6 +45,8 @@ public class BFS extends Algorithm {
                     visited[n.getId()] = true;
                     queue.add(n);
                 }
+                // compare current queue size to maxMemory
+                this.setMaxMemory(queue.size());
             }
         }
     }

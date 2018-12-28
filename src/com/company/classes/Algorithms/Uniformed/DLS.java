@@ -1,13 +1,22 @@
-package com.company.classes.Algorithms;
+package com.company.classes.Algorithms.Uniformed;
 
+import com.company.classes.Algorithms.Algorithm;
 import com.company.classes.Graph;
 import com.company.classes.Node;
 
 import java.util.Iterator;
 
-public class DFS extends Algorithm {
-    public DFS(Graph graph, Node start) {
+public class DLS extends Algorithm {
+    private int limit;
+
+    public DLS(Graph graph, Node start, int limit) {
         super(graph, start);
+
+        this.setLimit(limit);
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 
     @Override
@@ -17,11 +26,11 @@ public class DFS extends Algorithm {
         boolean[] visited = new boolean[this.graph.V];
 
         // Call the recursive helper function to print DFS traversal
-        DFSUtil(this.start, visited);
+        DFSUtil(this.start, visited, 0);
     }
 
     // A function used by DFS
-    private void DFSUtil(Node v, boolean[] visited) {
+    private void DFSUtil(Node v, boolean[] visited, int currentDepth) {
         // Mark the current node as visited and print it
         visited[v.getId()] = true;
         System.out.print(v.getId() + " ");
@@ -30,10 +39,10 @@ public class DFS extends Algorithm {
         Iterator<Node> i = this.graph.adj[v.getId()].listIterator();
         while (i.hasNext()) {
             Node n = i.next();
-            if (this.graphSearch && !visited[n.getId()])
-                DFSUtil(n, visited);
-            else if (!this.graphSearch)
-                DFSUtil(n, visited);
+            if (this.graphSearch && !visited[n.getId()] && this.limit > currentDepth) {
+                DFSUtil(n, visited, currentDepth + 1);
+            } else if (!this.graphSearch)
+                DFSUtil(n, visited, currentDepth + 1);
         }
     }
 }

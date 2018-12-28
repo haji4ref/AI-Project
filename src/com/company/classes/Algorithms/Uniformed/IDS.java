@@ -1,5 +1,6 @@
-package com.company.classes.Algorithms;
+package com.company.classes.Algorithms.Uniformed;
 
+import com.company.classes.Algorithms.Algorithm;
 import com.company.classes.Graph;
 import com.company.classes.Node;
 
