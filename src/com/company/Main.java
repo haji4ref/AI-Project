@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.classes.Algorithms.*;
 import com.company.classes.Algorithms.Uniformed.BFS;
+import com.company.classes.Algorithms.Uniformed.DFS;
 import com.company.classes.Graph;
 import com.company.classes.MyNodeBuilder;
 import com.company.classes.Node;
@@ -38,7 +39,7 @@ public class Main {
 
         Problem problem = new FirstProblem();
 
-        Algorithm algorithm = new BFS(problem, problem.getInitState()).setGraphSearch();
+        Algorithm algorithm = new DFS(problem, problem.getInitState()).setGraphSearch();
 
         algorithm.execute().printStatus();
 

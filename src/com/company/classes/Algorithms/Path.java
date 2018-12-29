@@ -1,5 +1,6 @@
 package com.company.classes.Algorithms;
 
+import com.company.classes.Printer;
 import com.company.classes.Problems.State;
 
 import java.util.Iterator;
@@ -29,11 +30,35 @@ public class Path {
         return this;
     }
 
+    public void push(State state) {
+        this.value.push(state);
+    }
+
+    public State pop() {
+        return this.value.pop();
+    }
+
+    public int size() {
+        return this.value.size();
+    }
+
     public Iterator listIterator() {
         return this.value.listIterator();
     }
 
     public State last() {
         return this.value.getLast();
+    }
+
+    public boolean isEmpty() {
+        return this.value.isEmpty();
+    }
+
+    public State get(int index) {
+        return this.value.get(index);
+    }
+
+    public void printPath() {
+        Printer.printStatesIterator(this.listIterator());
     }
 }

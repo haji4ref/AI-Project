@@ -39,16 +39,13 @@ public class BFS extends Algorithm {
             this.start = queue.poll();
             this.path = pathQueue.poll();
 
-            if (problem.goalTest(this.path.last()))
+            if (this.problem.goalTest(this.path.last()))
                 return this;
 
             // extend the current node
-            ArrayList<State> stateArrayList = new ArrayList<State>();
-            for (Action action : problem.possibleActions(this.start)) {
-                stateArrayList.addAll(problem.successors(action, this.start));
-            }
-            ListIterator<State> i = stateArrayList.listIterator();
+            ListIterator<State> i = this.extend(this.start).listIterator();
             this.incrementExtendedNumber();
+
             while (i.hasNext()) {
                 // visit the node
                 State state = i.next();

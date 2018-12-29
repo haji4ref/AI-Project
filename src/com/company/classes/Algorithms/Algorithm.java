@@ -2,11 +2,14 @@ package com.company.classes.Algorithms;
 
 import com.company.classes.Graph;
 import com.company.classes.Node;
+import com.company.classes.Problems.Action;
 import com.company.classes.Problems.Problem;
 import com.company.classes.Problems.State;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 abstract public class Algorithm {
     protected String name;
@@ -43,6 +46,15 @@ abstract public class Algorithm {
     }
 
     abstract public Algorithm execute();
+
+    protected ArrayList<State> extend(State state) {
+        ArrayList<State> stateArrayList = new ArrayList<State>();
+        for (Action action : this.problem.possibleActions(state)) {
+            stateArrayList.addAll(this.problem.successors(action, state));
+        }
+
+        return stateArrayList;
+    }
 
     public void incrementVisitedNumber() {
         this.visitedNumber++;
