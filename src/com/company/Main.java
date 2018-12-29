@@ -40,7 +40,8 @@ public class Main {
 
         Algorithm algorithm = new BFS(problem, problem.getInitState()).setGraphSearch();
 
-        algorithm.execute();
+        algorithm.execute().printStatus();
+
 //        ArrayList<State> states = problem.successors(
 //                new Action("ada"),
 //                problem.getInitState()

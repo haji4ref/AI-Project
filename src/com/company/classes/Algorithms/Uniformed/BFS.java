@@ -15,10 +15,11 @@ import java.util.ListIterator;
 public class BFS extends Algorithm {
     public BFS(Problem problem, State state) {
         super(problem, state);
+        this.name = "BFS";
     }
 
     @Override
-    public void execute() {
+    public Algorithm execute() {
         // Mark all the vertices as not visited(By default
         // set as false)
         ArrayList<State> visited = new ArrayList<State>();
@@ -40,11 +41,8 @@ public class BFS extends Algorithm {
             this.start = queue.poll();
             this.path = pathQueue.poll();
 
-            if (problem.goalTest(this.path.last())) {
-                this.prinPath();
-                System.out.println("END");
-                return;
-            }
+            if (problem.goalTest(this.path.last()))
+                return this;
 
             // extend the current node
             ArrayList<State> stateArrayList = new ArrayList<State>();
@@ -70,5 +68,6 @@ public class BFS extends Algorithm {
                 this.setMaxMemory(queue.size());
             }
         }
+        return this;
     }
 }

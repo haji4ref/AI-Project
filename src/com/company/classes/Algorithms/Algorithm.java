@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 abstract public class Algorithm {
+    protected String name;
+
     protected Problem problem;
 
     protected State start;
@@ -23,13 +25,24 @@ abstract public class Algorithm {
 
     protected boolean graphSearch = false;
 
+    public final void printStatus() {
+        System.out.println(this.name + " results:");
+        System.out.println("- Visited nodes number: " + this.visitedNumber);
+        System.out.println("- Extended nodes number: " + this.extendedNodeNumber);
+        System.out.println("- Used memory: " + this.maxMemory);
+        System.out.println("- Path cost: " + this.getPathCost());
+        System.out.println("- Suggested path :");
+        this.printPath();
+
+    }
+
     public Algorithm(Problem problem, State state) {
         this.problem = problem;
         this.start = state;
         this.path = new Path(new LinkedList<State>());
     }
 
-    abstract public void execute();
+    abstract public Algorithm execute();
 
     public void incrementVisitedNumber() {
         this.visitedNumber++;
@@ -43,7 +56,7 @@ abstract public class Algorithm {
         this.path.add(state);
     }
 
-    protected void prinPath() {
+    protected void printPath() {
         Iterator<State> iterator = this.path.listIterator();
         int counter = 0;
         while (iterator.hasNext()) {
@@ -51,6 +64,17 @@ abstract public class Algorithm {
             iterator.next().printValues();
             counter++;
         }
+    }
+
+    private int getPathCost() {
+        int sum = 0;
+        Iterator<State> iterator = this.path.listIterator();
+
+        while (iterator.hasNext()) {
+            sum += iterator.next().getCost();
+        }
+
+        return sum;
     }
 
     public void setMaxMemory(int maxMemory) {
