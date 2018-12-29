@@ -16,10 +16,12 @@ public class DFS extends Algorithm {
 
     @Override
     public Algorithm execute() {
+        clearAnswer();
+
         ArrayList<String> visited = new ArrayList<String>();
 
         // Call the recursive helper function to print DFS traversal
-        DFSUtil(this.start, visited);
+        this.hasAnswer = DFSUtil(this.start, visited);
 
         return this;
     }

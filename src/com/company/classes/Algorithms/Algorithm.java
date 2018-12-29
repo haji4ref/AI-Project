@@ -28,7 +28,9 @@ abstract public class Algorithm {
 
     protected boolean graphSearch = false;
 
-    public final void printStatus() {
+    protected boolean hasAnswer = false;
+
+    public void printStatus() {
         System.out.println(this.name + " results:");
         System.out.println("- Visited nodes number: " + this.visitedNumber);
         System.out.println("- Extended nodes number: " + this.extendedNodeNumber);
@@ -103,5 +105,13 @@ abstract public class Algorithm {
         this.graphSearch = true;
 
         return this;
+    }
+
+    public boolean hasAnswer() {
+        return this.hasAnswer;
+    }
+
+    public void clearAnswer() {
+        this.hasAnswer = false;
     }
 }
