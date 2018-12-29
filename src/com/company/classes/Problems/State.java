@@ -46,4 +46,8 @@ public class State {
         }
         System.out.println();
     }
+
+    public String joinValues() {
+        return String.join(",", this.value);
+    }
 }
