@@ -1,22 +1,34 @@
 package com.company.classes.Algorithms.Uniformed;
 
 import com.company.classes.Algorithms.Algorithm;
-import com.company.classes.Graph;
-import com.company.classes.Node;
+import com.company.classes.Problems.Problem;
+import com.company.classes.Problems.State;
 
 public class IDS extends Algorithm {
-    public IDS(Graph graph, Node start) {
-        super(graph, start);
+    public IDS(Problem problem, State start) {
+        super(problem, start);
+
+        this.name = "IDS";
     }
 
     @Override
-    public void execute() {
+    public Algorithm execute() {
         int i = 0;
-        DLS dls = new DLS(this.graph, this.start, i);
-        while (i < 4) {
+        DLS dls;
+        do {
+            dls = (DLS) new DLS(this.problem, this.start).setLimit(++i).setGraphSearch();
             dls.execute();
-            dls.setLimit(++i);
-            System.out.println();
-        }
+        } while (!dls.hasAnswer());
+
+        dls.printStatus();
+
+        this.hasAnswer = true;
+
+        return this;
+    }
+
+    @Override
+    public void printStatus() {
+        System.out.println("IDS results includes searching iteratively by dls algorithm :");
     }
 }
