@@ -1,15 +1,10 @@
 package com.company.classes.Algorithms.Uniformed;
 
 import com.company.classes.Algorithms.Algorithm;
-import com.company.classes.Graph;
-import com.company.classes.Node;
-import com.company.classes.Printer;
-import com.company.classes.Problems.Action;
 import com.company.classes.Problems.Problem;
 import com.company.classes.Problems.State;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ListIterator;
 
 public class DFS extends Algorithm {
