@@ -1,48 +1,84 @@
 package com.company.classes.Algorithms.Uniformed;
 
 import com.company.classes.Algorithms.Algorithm;
-import com.company.classes.Graph;
-import com.company.classes.Node;
+import com.company.classes.Problems.Problem;
+import com.company.classes.Problems.State;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class DLS extends Algorithm {
-    private int limit;
+    private int limit = 0;
 
-    public DLS(Graph graph, Node start, int limit) {
-        super(graph, start);
+    public DLS(Problem problem, State start) {
+        super(problem, start);
 
-        this.setLimit(limit);
+        this.name = "DLS";
     }
 
-    public void setLimit(int limit) {
+    public DLS setLimit(int limit) {
         this.limit = limit;
+
+        return this;
     }
 
     @Override
-    public void execute() {
-// Mark all the vertices as not visited(set as
-        // false by default in java)
-        boolean[] visited = new boolean[this.graph.V];
+    public Algorithm execute() {
+        ArrayList<String> visited = new ArrayList<String>();
 
         // Call the recursive helper function to print DFS traversal
         DFSUtil(this.start, visited, 0);
+
+        return this;
     }
 
     // A function used by DFS
-    private void DFSUtil(Node v, boolean[] visited, int currentDepth) {
+    private boolean DFSUtil(State state, ArrayList<String> visited, int currentDepth) {
         // Mark the current node as visited and print it
-        visited[v.getId()] = true;
-        System.out.print(v.getId() + " ");
+        visited.add(state.joinValues());
+
+        this.path.push(state);
+
+        if (this.problem.goalTest(state)) {
+            return true;
+        }
 
         // Recur for all the vertices adjacent to this vertex
-        Iterator<Node> i = this.graph.adj[v.getId()].listIterator();
-        while (i.hasNext()) {
-            Node n = i.next();
-            if (this.graphSearch && !visited[n.getId()] && this.limit > currentDepth) {
-                DFSUtil(n, visited, currentDepth + 1);
-            } else if (!this.graphSearch)
-                DFSUtil(n, visited, currentDepth + 1);
+        // extend the current node
+        ListIterator<State> iterator = this.extend(state).listIterator();
+        this.incrementExtendedNumber();
+        while (iterator.hasNext()) {
+            State state1 = iterator.next();
+            if (this.limit > currentDepth) {
+                if (this.graphSearch && !visited.contains(state1.joinValues())) {
+                    this.incrementVisitedNumber();
+                    if (DFSUtil(state1, visited, currentDepth + 1))
+                        return true;
+                    else
+                        this.path.pop();
+                } else if (!this.graphSearch) {
+                    this.incrementVisitedNumber();
+                    if (DFSUtil(state1, visited, currentDepth + 1))
+                        return true;
+                    else
+                        this.path.pop();
+                }
+            }
+
+
+            this.setMaxMemory(this.path.size());
         }
+        return false;
+    }
+
+    @Override
+    protected void printPath() {
+        int counter = 0, size = this.path.size();
+        while (counter < size) {
+            System.out.print(counter + ".");
+            this.path.get(size - 1 - counter).printValues();
+            counter++;
+        }
+
     }
 }
