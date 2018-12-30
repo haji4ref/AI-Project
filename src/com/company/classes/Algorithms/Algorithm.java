@@ -1,7 +1,5 @@
 package com.company.classes.Algorithms;
 
-import com.company.classes.Graph;
-import com.company.classes.Node;
 import com.company.classes.Problems.Action;
 import com.company.classes.Problems.Problem;
 import com.company.classes.Problems.State;
@@ -9,7 +7,6 @@ import com.company.classes.Problems.State;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 abstract public class Algorithm {
     protected String name;
@@ -113,5 +110,13 @@ abstract public class Algorithm {
 
     public void clearAnswer() {
         this.hasAnswer = false;
+    }
+
+    protected Path pathStart(State state) {
+        LinkedList<State> linkedList = new LinkedList<State>();
+
+        linkedList.add(state);
+
+        return new Path(linkedList);
     }
 }
