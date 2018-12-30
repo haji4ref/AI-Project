@@ -71,7 +71,6 @@ abstract public class Algorithm {
         Iterator<State> iterator = this.path.listIterator();
         int counter = 0;
         while (iterator.hasNext()) {
-            System.out.print(counter + ".");
             iterator.next().printValues();
             counter++;
         }

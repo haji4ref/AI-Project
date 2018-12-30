@@ -1,6 +1,8 @@
 package com.company.classes.Problems.utils;
 
-public class Action {
+import com.company.classes.Printable;
+
+public class Action implements Printable {
     private String value;
 
     public Action(String value) {
@@ -11,4 +13,8 @@ public class Action {
         return this.value;
     }
 
+    @Override
+    public void print() {
+        System.out.print(this.value + " ");
+    }
 }

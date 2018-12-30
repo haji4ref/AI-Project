@@ -4,6 +4,7 @@ import com.company.classes.Algorithms.*;
 import com.company.classes.Algorithms.Uniformed.*;
 import com.company.classes.Problems.FirstProblem;
 import com.company.classes.Problems.Problem;
+import com.company.classes.Problems.SecondProblem;
 import com.company.classes.Problems.utils.State;
 
 import java.util.Iterator;
@@ -30,9 +31,10 @@ public class Main {
 //
 //        algorithm.execute();
 
-        Problem problem = new FirstProblem();
+        Problem problem = new SecondProblem();
 
-        Algorithm algorithm = new Bidirectional(problem, problem.getInitState());
+
+        Algorithm algorithm = new DFS(problem, problem.getInitState()).setGraphSearch();
 
         algorithm.execute().printStatus();
 

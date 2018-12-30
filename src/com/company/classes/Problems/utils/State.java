@@ -2,7 +2,7 @@ package com.company.classes.Problems.utils;
 
 
 public class State {
-    private String[] value;
+    protected String[] value;
 
     private int cost = 1;
 
@@ -49,5 +49,9 @@ public class State {
 
     public String joinValues() {
         return String.join(",", this.value);
+    }
+
+    public boolean equals(State state) {
+        return this.joinValues().equals(state.joinValues());
     }
 }
