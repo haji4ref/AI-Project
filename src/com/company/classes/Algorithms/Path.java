@@ -38,6 +38,30 @@ public class Path {
         return this.value.pop();
     }
 
+    public Path removeLast() {
+        this.value.pollLast();
+
+        return this;
+    }
+
+    public Path rotate() {
+        LinkedList<State> rotatedValue = new LinkedList<State>();
+        int index = 0, size = this.value.size();
+        while (index < size)
+            rotatedValue.add(index, this.value.get(size - (++index)));
+
+        this.setValue(rotatedValue);
+
+        return this;
+    }
+
+    public Path concat(Path path) {
+        int counter = 0, size = path.size();
+        while (counter < size)
+            this.value.add(path.get(counter++));
+        return this;
+    }
+
     public int size() {
         return this.value.size();
     }
@@ -59,6 +83,6 @@ public class Path {
     }
 
     public void printPath() {
-        Printer.printStatesIterator(this.listIterator());
+        Printer.print(this.listIterator());
     }
 }
