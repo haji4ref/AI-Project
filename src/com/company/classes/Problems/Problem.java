@@ -19,6 +19,10 @@ abstract public class Problem {
         return this.initState;
     }
 
+    public State getFinalState() {
+        return finalState;
+    }
+
     abstract protected void setInitState();
 
     abstract protected void setActions();
