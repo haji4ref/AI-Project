@@ -1,10 +1,7 @@
 package com.company;
 
 import com.company.classes.Algorithms.*;
-import com.company.classes.Algorithms.Uniformed.BFS;
-import com.company.classes.Algorithms.Uniformed.DFS;
-import com.company.classes.Algorithms.Uniformed.DLS;
-import com.company.classes.Algorithms.Uniformed.IDS;
+import com.company.classes.Algorithms.Uniformed.*;
 import com.company.classes.Graph;
 import com.company.classes.MyNodeBuilder;
 import com.company.classes.Node;
@@ -41,7 +38,7 @@ public class Main {
 
         Problem problem = new FirstProblem();
 
-        Algorithm algorithm = new IDS(problem, problem.getInitState()).setGraphSearch();
+        Algorithm algorithm = new Bidirectional(problem, problem.getInitState());
 
         algorithm.execute().printStatus();
 
