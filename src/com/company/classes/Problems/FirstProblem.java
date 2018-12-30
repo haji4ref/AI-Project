@@ -1,6 +1,8 @@
 package com.company.classes.Problems;
 
-import java.lang.reflect.Array;
+import com.company.classes.Problems.utils.Action;
+import com.company.classes.Problems.utils.State;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;

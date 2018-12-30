@@ -1,4 +1,4 @@
-package com.company.classes.Problems;
+package com.company.classes.Problems.utils;
 
 public class Action {
     private String value;

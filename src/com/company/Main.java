@@ -2,16 +2,10 @@ package com.company;
 
 import com.company.classes.Algorithms.*;
 import com.company.classes.Algorithms.Uniformed.*;
-import com.company.classes.Graph;
-import com.company.classes.MyNodeBuilder;
-import com.company.classes.Node;
-import com.company.classes.Problems.Action;
 import com.company.classes.Problems.FirstProblem;
 import com.company.classes.Problems.Problem;
-import com.company.classes.Problems.State;
+import com.company.classes.Problems.utils.State;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Main {

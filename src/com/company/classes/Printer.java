@@ -1,7 +1,7 @@
 package com.company.classes;
 
 import com.company.classes.Algorithms.Path;
-import com.company.classes.Problems.State;
+import com.company.classes.Problems.utils.State;
 
 import java.util.ArrayList;
 import java.util.Iterator;

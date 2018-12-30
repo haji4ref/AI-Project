@@ -1,7 +1,7 @@
 package com.company.classes.Algorithms;
 
 import com.company.classes.Printer;
-import com.company.classes.Problems.State;
+import com.company.classes.Problems.utils.State;
 
 import java.util.Iterator;
 import java.util.LinkedList;

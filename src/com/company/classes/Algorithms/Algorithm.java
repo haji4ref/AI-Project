@@ -1,8 +1,8 @@
 package com.company.classes.Algorithms;
 
-import com.company.classes.Problems.Action;
+import com.company.classes.Problems.utils.Action;
 import com.company.classes.Problems.Problem;
-import com.company.classes.Problems.State;
+import com.company.classes.Problems.utils.State;
 
 import java.util.ArrayList;
 import java.util.Iterator;

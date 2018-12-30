@@ -2,7 +2,7 @@ package com.company.classes.Algorithms.Uniformed;
 
 import com.company.classes.Algorithms.Algorithm;
 import com.company.classes.Problems.Problem;
-import com.company.classes.Problems.State;
+import com.company.classes.Problems.utils.State;
 
 public class IDS extends Algorithm {
     public IDS(Problem problem, State start) {
