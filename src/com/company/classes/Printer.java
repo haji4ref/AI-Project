@@ -29,5 +29,10 @@ public class Printer {
         System.out.println("------------");
     }
 
+    public static void print(Printable[] printables) {
+        for (Printable printable : printables)
+            printable.print();
+    }
+
 
 }
