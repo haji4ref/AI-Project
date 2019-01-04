@@ -34,7 +34,7 @@ public class Main {
         Problem problem = new SecondProblem();
 
 
-        Algorithm algorithm = new DFS(problem, problem.getInitState()).setGraphSearch();
+        Algorithm algorithm = new DLS(problem, problem.getInitState()).setLimit(40).setGraphSearch();
 
         algorithm.execute().printStatus();
 

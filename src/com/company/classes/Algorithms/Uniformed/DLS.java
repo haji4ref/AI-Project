@@ -77,7 +77,7 @@ public class DLS extends Algorithm {
     protected void printPath() {
         int counter = 0, size = this.path.size();
         while (counter < size) {
-            System.out.print(counter + ".");
+//            System.out.print(counter + ".");
             this.path.get(size - 1 - counter).printValues();
             counter++;
         }
