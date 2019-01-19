@@ -54,4 +54,8 @@ public class State {
     public boolean equals(State state) {
         return this.joinValues().equals(state.joinValues());
     }
+
+    public int getInt(int index) {
+        return Integer.parseInt(this.value[index]);
+    }
 }

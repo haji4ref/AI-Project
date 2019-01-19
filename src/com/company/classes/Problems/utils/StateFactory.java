@@ -18,4 +18,12 @@ public class StateFactory {
         Arrays.fill(strings, string);
         return new State(strings);
     }
+
+    public static State createPositionalState(int... values) {
+        return new State(
+                new String[]{
+                        Integer.toString(values[0]), Integer.toString(values[1])
+                }
+        );
+    }
 }
