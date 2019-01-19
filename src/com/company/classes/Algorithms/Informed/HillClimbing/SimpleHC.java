@@ -21,25 +21,29 @@ public class SimpleHC extends Algorithm {
     @Override
     public Algorithm execute() {
         // Crate a queue for storing path
-        Path path = new Path(new LinkedList<State>());
+        this.path = new Path(new LinkedList<State>());
 
-        path.add(this.start);
+        this.path.add(this.start);
 
         State toBeExtended = this.start;
 
         while (true) {
             ListIterator<State> i = this.extend(toBeExtended).listIterator();
+            this.incrementExtendedNumber();
             State selectedState = toBeExtended;
+            State state = toBeExtended;
             while (i.hasNext()) {
-                State state = i.next();
-                selectedState = this.problem.valueFunction(state) > selectedState.getSuitability()
+                selectedState = this.problem.valueFunction(state) > this.problem.valueFunction(selectedState)
                         ? state
                         : selectedState;
+                this.incrementVisitedNumber();
+                state = i.next();
             }
             if (toBeExtended.equals(selectedState)) {
+                this.setMaxMemory(this.extend(toBeExtended).size());
                 return this;
             } else {
-                path.add(selectedState);
+                this.path.add(selectedState);
                 toBeExtended = selectedState;
             }
 

@@ -66,12 +66,19 @@ public class State {
         return Integer.parseInt(this.value[index]);
     }
 
-    public State setSuitability(int value) {
-        this.suitability = value;
-        return this;
-    }
+//    public State setSuitability(int value) {
+//        this.suitability = value;
+//        return this;
+//    }
+//
+//    public int getSuitability() {
+//        return this.suitability;
+//    }
 
-    public int getSuitability() {
-        return this.suitability;
+    public State swap(int index1, int index2) {
+        String tmp = this.value[index1];
+        this.value[index1] = this.value[index2];
+        this.value[index2] = tmp;
+        return this;
     }
 }
