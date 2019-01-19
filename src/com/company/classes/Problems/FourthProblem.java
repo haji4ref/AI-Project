@@ -23,7 +23,7 @@ public class FourthProblem extends GreedyProblem {
     protected void setInitState() {
         String[] strings = new String[this.K * 3];
         for (int i = 0; i < this.K * 3; i++)
-            strings[i] = Integer.toString(ThreadLocalRandom.current().nextInt(0, 10));
+            strings[i] = Integer.toString(ThreadLocalRandom.current().nextInt(0, 10 + 1));
         this.initState = StateFactory.create(strings);
     }
 
@@ -71,6 +71,7 @@ public class FourthProblem extends GreedyProblem {
                     state.getInt(i * 3 + 2);
             max = sum > max ? sum : max;
         }
+        state.setSuitability(100 - max);
         return 100 - max;
     }
 }

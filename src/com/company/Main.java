@@ -1,10 +1,10 @@
 package com.company;
 
 import com.company.classes.Algorithms.*;
+import com.company.classes.Algorithms.Informed.HillClimbing.RandomHC;
+import com.company.classes.Algorithms.Informed.HillClimbing.SimpleHC;
 import com.company.classes.Algorithms.Uniformed.*;
-import com.company.classes.Problems.FirstProblem;
-import com.company.classes.Problems.Problem;
-import com.company.classes.Problems.SecondProblem;
+import com.company.classes.Problems.*;
 import com.company.classes.Problems.utils.State;
 
 import java.util.Iterator;
@@ -31,10 +31,10 @@ public class Main {
 //
 //        algorithm.execute();
 
-        Problem problem = new SecondProblem();
+        GreedyProblem problem = new FourthProblem(4);
 
 
-        Algorithm algorithm = new DLS(problem, problem.getInitState()).setLimit(40).setGraphSearch();
+        Algorithm algorithm = new RandomHC(problem, problem.getInitState());
 
         algorithm.execute().printStatus();
 
