@@ -2,12 +2,18 @@ package com.company.classes.Problems.utils;
 
 
 public class State {
+    private int suitability;
+
     protected String[] value;
 
     private int cost = 1;
 
     public State(String[] value) {
         this.value = value;
+    }
+
+    public State() {
+        this.value = new String[]{};
     }
 
     public State(State state) {
@@ -40,6 +46,7 @@ public class State {
         return this;
     }
 
+
     public void printValues() {
         for (String value : this.value) {
             System.out.print(value + " ");
@@ -57,5 +64,14 @@ public class State {
 
     public int getInt(int index) {
         return Integer.parseInt(this.value[index]);
+    }
+
+    public State setSuitability(int value) {
+        this.suitability = value;
+        return this;
+    }
+
+    public int getSuitability() {
+        return this.suitability;
     }
 }
