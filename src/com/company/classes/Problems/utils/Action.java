@@ -13,6 +13,10 @@ public class Action implements Printable {
         return this.value;
     }
 
+    public boolean equals(Action action) {
+        return this.getValue().equals(action.getValue());
+    }
+
     @Override
     public void print() {
         System.out.print(this.value + " ");

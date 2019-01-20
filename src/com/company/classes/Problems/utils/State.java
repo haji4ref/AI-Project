@@ -16,6 +16,10 @@ public class State {
         this.value = new String[]{};
     }
 
+    public State(String[][] value){
+
+    }
+
     public State(State state) {
         this.value = state.getValue().clone();
     }
