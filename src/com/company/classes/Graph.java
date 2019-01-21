@@ -18,6 +18,7 @@ public class Graph {
     // Function to add an edge into the graph
     public void addEdge(Node v, Node w) {
         this.adj[v.getId()].add(w);
+        this.adj[w.getId()].add(v);
     }
 
 }
