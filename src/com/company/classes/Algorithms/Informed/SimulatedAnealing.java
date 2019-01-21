@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SimulatedAnealing extends Algorithm {
     private GreedyProblem problem;
 
-    private double T = 1000;
+    private double T = 100;
 
     public SimulatedAnealing(GreedyProblem problem, State state) {
         super(problem, state);
@@ -63,7 +63,7 @@ public class SimulatedAnealing extends Algorithm {
     private void decreaseTemp(String operator) {
         switch (operator) {
             case "MIN":
-                this.T -= 2;
+                this.T -= 10;
                 break;
             case "DIV":
                 this.T /= 2;
