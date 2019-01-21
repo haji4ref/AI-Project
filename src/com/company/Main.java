@@ -1,9 +1,7 @@
 package com.company;
 
 import com.company.classes.Algorithms.*;
-import com.company.classes.Algorithms.Informed.HillClimbing.RandomHC;
-import com.company.classes.Algorithms.Informed.HillClimbing.SimpleHC;
-import com.company.classes.Algorithms.Uniformed.*;
+import com.company.classes.Algorithms.Informed.SimulatedAnealing;
 import com.company.classes.Problems.*;
 import com.company.classes.Problems.utils.State;
 
@@ -31,10 +29,9 @@ public class Main {
 //
 //        algorithm.execute();
 
-        GreedyProblem problem = new FourthProblem(4);
+        GreedyProblem problem = new FifthProblem();
 
-
-        Algorithm algorithm = new RandomHC(problem, problem.getInitState());
+        Algorithm algorithm = new SimulatedAnealing(problem, problem.getInitState());
 
         algorithm.execute().printStatus();
 

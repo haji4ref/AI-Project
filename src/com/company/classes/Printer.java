@@ -34,5 +34,19 @@ public class Printer {
             printable.print();
     }
 
+    public static void print(String[][] strings) {
+        for (int i = 0; i < strings.length; i++) {
+            for (int j = 0; j < strings[i].length; j++) {
+                System.out.print(" " + strings[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("------------");
+    }
+
+    public static void printLn(String string) {
+        System.out.println(string);
+    }
+
 
 }

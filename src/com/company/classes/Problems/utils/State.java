@@ -8,7 +8,7 @@ public class State {
 
     private int cost = 1;
 
-    private int prob = 0;
+    private double prob = 0;
 
     public State(String[] value) {
         this.value = value;
@@ -81,13 +81,13 @@ public class State {
         return this.suitability;
     }
 
-    public State setProb(int prob) {
+    public State setProb(double prob) {
         this.prob = prob;
 
         return this;
     }
 
-    public int getProb() {
+    public double getProb() {
         return this.prob;
     }
 

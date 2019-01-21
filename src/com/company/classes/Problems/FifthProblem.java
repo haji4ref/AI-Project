@@ -8,6 +8,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class FifthProblem extends GreedyProblem {
+    public FifthProblem() {
+        this.setInitState();
+        this.setActions();
+    }
+
     @Override
     protected void setInitState() {
         this.initState = new TwoDimState(
@@ -20,7 +25,7 @@ public class FifthProblem extends GreedyProblem {
                         "y", "y", "y", "b", "y", "y", "b", "y", "y",
 
                 }
-                , 9, 6);
+                , 6, 9);
     }
 
     @Override
@@ -212,26 +217,47 @@ public class FifthProblem extends GreedyProblem {
             this.rotate(strings[0], false);
         } else if (action.equals(this.actions[10])) {// BOT_RIGHT
             // shift
-            String[] tmp = copyRow(strings, 1);
-            swapHorizontal(strings, 5, 1, false, 6);
-            swapHorizontal(strings, 3, 5, true, 6);
-            swapHorizontal(strings, 2, 3, false, 6);
-            setRow(strings, tmp, 2, false);
+            String[] tmp = new String[]{strings[1][6], strings[1][7], strings[1][8]};
+            strings[1][6] = strings[5][6];
+            strings[1][7] = strings[5][7];
+            strings[1][8] = strings[5][8];
+            strings[5][6] = strings[3][8];
+            strings[5][7] = strings[3][7];
+            strings[5][8] = strings[3][6];
+            strings[3][6] = strings[2][6];
+            strings[3][7] = strings[2][7];
+            strings[3][8] = strings[2][8];
+            strings[2][6] = tmp[0];
+            strings[2][7] = tmp[1];
+            strings[2][8] = tmp[2];
             // rotate
             this.rotate(strings[4], true);
         } else { // BOT_LEFT
             // shift
-            String[] tmp = copyRow(strings, 2);
-            swapHorizontal(strings, 3, 2, false, 6);
-            swapHorizontal(strings, 5, 3, true, 6);
-            swapHorizontal(strings, 1, 5, false, 6);
-            setRow(strings, tmp, 1, false);
+            String[] tmp = new String[]{strings[2][6], strings[2][7], strings[2][8]};
+            strings[2][6] = strings[3][6];
+            strings[2][7] = strings[3][7];
+            strings[2][8] = strings[3][8];
+            strings[3][6] = strings[5][8];
+            strings[3][7] = strings[5][7];
+            strings[3][8] = strings[5][6];
+            strings[5][6] = strings[1][6];
+            strings[5][7] = strings[1][7];
+            strings[5][8] = strings[1][8];
+            strings[1][6] = tmp[0];
+            strings[1][7] = tmp[1];
+            strings[1][8] = tmp[2];
             // rotate
             this.rotate(strings[4], false);
         }
+//        Printer.printLn(action.getValue());
+
+//        this.printColorNumber(strings);
+//        Printer.print(strings);
+
         ArrayList<State> states = new ArrayList<>();
 
-        states.add(new State(this.castToOne(strings)));
+        states.add(new TwoDimState(this.castToOne(strings), 6, 9).setCalledAction(action));
 
         return states;
 
@@ -245,6 +271,10 @@ public class FifthProblem extends GreedyProblem {
     @Override
     public int pathCost(LinkedList<State> stateLinkedList) {
         return 0;
+    }
+
+    public String[] copyRow(String[][] twoDimStrings, int number, int offset) {
+        return new String[]{twoDimStrings[number][0 + offset], twoDimStrings[number][1 + offset], twoDimStrings[number][2 + offset]};
     }
 
     public String[] copyRow(String[][] twoDimStrings, int number) {
@@ -312,7 +342,9 @@ public class FifthProblem extends GreedyProblem {
                 row[row.length - i] = tmp;
             }
         }
-        strings[rowNumber] = row;
+        strings[rowNumber][0] = row[0];
+        strings[rowNumber][1] = row[1];
+        strings[rowNumber][2] = row[2];
     }
 
 
@@ -346,7 +378,45 @@ public class FifthProblem extends GreedyProblem {
 
     @Override
     public int valueFunction(State state) {
-        String[][] sides = this.castToTwo(state.getValue());
+        String[][] array2D = this.castToTwo(state.getValue());
+        int sumMax = 0;
+        ArrayList<String> colors = new ArrayList<String>() {
+            {
+                add("w");
+                add("b");
+                add("r");
+                add("g");
+                add("o");
+                add("y");
+            }
+        };
+        for (int i = 0; i < 6; i++) {
+            int[] colorNum = new int[6];
+            int sideMax = 0;
+            for (int j = 0; j < 9; j++) {
+                colorNum[colors.indexOf(array2D[i][j])]++;
+            }
+            for (int k = 0; k < 6; k++) {
+                if (sideMax < colorNum[k]) {
+                    sideMax = colorNum[k];
+                }
+            }
+
+            sumMax = sumMax + sideMax;
+
+        }
+        state.setSuitability(sumMax);
+        return sumMax;
+    }
+
+    private void clearHashMapValues(HashMap<String, Integer> hashMap) {
+        for (HashMap.Entry<String, Integer> entry : hashMap.entrySet()) {
+            String key = entry.getKey();
+            hashMap.put(key, 0);
+        }
+    }
+
+    private void printColorNumber(String[][] strings) {
         HashMap<String, Integer> numberOfColors = new HashMap<String, Integer>() {
             {
                 put("w", 0);
@@ -357,20 +427,25 @@ public class FifthProblem extends GreedyProblem {
                 put("y", 0);
             }
         };
-        int sum = 0;
-        for (int i = 0; i < sides.length; i++) {
-            for (int j = 0; j < sides[i].length; j++) {
-                numberOfColors.put(sides[i][j], numberOfColors.get(sides[i][j]) + 1);
+
+        for (int i = 0; i < strings.length; i++) {
+            for (int j = 0; j < strings[i].length; j++) {
+                numberOfColors.put(strings[i][j], numberOfColors.get(strings[i][j]) + 1);
             }
-            sum += this.calculateMax((Integer[]) numberOfColors.values().toArray());
         }
-        return sum;
+        for (HashMap.Entry<String, Integer> entry : numberOfColors.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            System.out.print(key + ":" + value + ",");
+        }
+        System.out.println();
     }
 
-    private int calculateMax(Integer[] integers) {
+    private int calculateMax(HashMap<String, Integer> hashMap) {
         int max = 0;
-        for (int i = 0; i < integers.length; i++) {
-            max = max > integers[i] ? max : integers[i];
+        for (HashMap.Entry<String, Integer> entry : hashMap.entrySet()) {
+            Integer value = entry.getValue();
+            max = max > value ? max : value;
         }
         return max;
     }
