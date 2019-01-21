@@ -2,6 +2,7 @@ package com.company.classes.Problems;
 
 import com.company.classes.Graph;
 import com.company.classes.MyNodeBuilder;
+import com.company.classes.Node;
 import com.company.classes.Problems.utils.Action;
 import com.company.classes.Problems.utils.State;
 import com.company.classes.Problems.utils.StateFactory;
@@ -15,7 +16,7 @@ public class SixthProblem extends GreedyProblem {
 
     private String[] colorsBag = new String[]{"a", "b", "c", "d", "e", "f", "g", "h"};
 
-    private String[] colors = new String[]{};
+    private String[] colors;
 
     private Graph graph;
 
@@ -25,9 +26,16 @@ public class SixthProblem extends GreedyProblem {
         this.colorNum = 3;
         this.nodes = 4;
         this.initGraph();
-        for (int i = 0; i < this.colorNum; i++) {
+        // init colors
+        this.colors = new String[this.colorNum];
+        ArrayList<String> tmpColors = new ArrayList<>();
+        int counter = 0;
+        while (counter < this.colorNum) {
             int random = ThreadLocalRandom.current().nextInt(0, colorsBag.length);
-            this.colors[i] = this.colorsBag[random];
+            if (!tmpColors.contains(this.colorsBag[random])) {
+                tmpColors.add(this.colorsBag[random]);
+                this.colors[counter++] = this.colorsBag[random];
+            }
         }
         this.setInitState();
 
@@ -41,16 +49,32 @@ public class SixthProblem extends GreedyProblem {
     private void initGraph() {
         this.graph = new Graph(this.nodes);
 
-        this.graph.addEdge(MyNodeBuilder.instance("0"), MyNodeBuilder.instance("1"));
-        this.graph.addEdge(MyNodeBuilder.instance("0"), MyNodeBuilder.instance("2"));
-        this.graph.addEdge(MyNodeBuilder.instance("0"), MyNodeBuilder.instance("3"));
-        this.graph.addEdge(MyNodeBuilder.instance("2"), MyNodeBuilder.instance("3"));
-        this.graph.addEdge(MyNodeBuilder.instance("1"), MyNodeBuilder.instance("2"));
+        this.graph.addNode(
+                new Node[]{
+                        MyNodeBuilder.instance("0"),
+                        MyNodeBuilder.instance("1"),
+                        MyNodeBuilder.instance("2"),
+                        MyNodeBuilder.instance("3"),
+                }
+        );
 
+        this.graph.addEdge(this.graph.get(0), this.graph.get(1));
+        this.graph.addEdge(this.graph.get(0), this.graph.get(2));
+        this.graph.addEdge(this.graph.get(0), this.graph.get(3));
+        this.graph.addEdge(this.graph.get(2), this.graph.get(3));
+        this.graph.addEdge(this.graph.get(1), this.graph.get(2));
+
+    }
+
+    private void paintGraph(State state) {
+        for (int i = 0; i < state.length(); i++) {
+            this.graph.get(i).setColor(state.getValue(i));
+        }
     }
 
     @Override
     public int valueFunction(State state) {
+        this.paintGraph(state);
         int sum = 0;
         for (int i = 0; i < state.length(); i++) {
             for (int j = 0; j < this.graph.adj[i].size(); j++) {
@@ -69,21 +93,11 @@ public class SixthProblem extends GreedyProblem {
     @Override
     protected void setInitState() {
         // k = 4
-        this.geneticStates = new State[]{
-                StateFactory.create("r", "r", "g", "b"),
-                StateFactory.create("r", "g", "g", "b"),
-                StateFactory.create("b", "r", "g", "b"),
-                StateFactory.create("g", "g", "g", "b"),
-        };
+        this.geneticStates = StateFactory.createForGenetic(4, 4, this.colors);
     }
 
     public State[] getRandomChilds(int k) {
-        return new State[]{
-                StateFactory.create("r", "r", "g", "b"),
-                StateFactory.create("r", "g", "g", "b"),
-                StateFactory.create("b", "r", "g", "b"),
-                StateFactory.create("g", "g", "g", "b"),
-        };
+        return StateFactory.createForGenetic(4, 4, this.colors);
 //        State[] states = new State[k];
 //        for (int i = 0; i < k; i++) {
 //            State state = new State(new String[this.nodes]);
@@ -113,7 +127,14 @@ public class SixthProblem extends GreedyProblem {
 
     @Override
     public boolean goalTest(State state) {
-        return false;
+        return true;
+    }
+
+    public int goalTest(double[] values) {
+        for (int i = 0; i < values.length; i++)
+            if (values[i] == 0)
+                return i;
+        return -1;
     }
 
     @Override
