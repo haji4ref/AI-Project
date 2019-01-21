@@ -10,6 +10,8 @@ import java.util.LinkedList;
 abstract public class Problem {
     protected State initState;
 
+    protected State[] geneticStates;
+
     protected Action[] actions;
 
     protected Graph stateSpace;

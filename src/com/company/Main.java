@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.classes.Algorithms.*;
+import com.company.classes.Algorithms.Informed.Genetic;
 import com.company.classes.Algorithms.Informed.SimulatedAnealing;
 import com.company.classes.Problems.*;
 import com.company.classes.Problems.utils.State;
@@ -16,9 +17,9 @@ public class Main {
 //
 //        algorithm.execute();
 
-        GreedyProblem problem = new SixthProblem();
+        SixthProblem problem = new SixthProblem();
 
-        Algorithm algorithm = new SimulatedAnealing(problem, problem.getInitState());
+        Algorithm algorithm = new Genetic(problem, problem.getInitState());
 
         algorithm.execute().printStatus();
 

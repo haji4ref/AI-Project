@@ -44,6 +44,7 @@ abstract public class Algorithm {
         this.path = new Path(new LinkedList<State>());
     }
 
+
     abstract public Algorithm execute();
 
     protected ArrayList<State> extend(State state) {
