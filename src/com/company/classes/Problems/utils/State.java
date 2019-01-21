@@ -8,6 +8,8 @@ public class State {
 
     private int cost = 1;
 
+    private int prob = 0;
+
     public State(String[] value) {
         this.value = value;
     }
@@ -16,7 +18,7 @@ public class State {
         this.value = new String[]{};
     }
 
-    public State(String[][] value){
+    public State(String[][] value) {
 
     }
 
@@ -77,6 +79,16 @@ public class State {
 
     public int getSuitability() {
         return this.suitability;
+    }
+
+    public State setProb(int prob) {
+        this.prob = prob;
+
+        return this;
+    }
+
+    public int getProb() {
+        return this.prob;
     }
 
     public State swap(int index1, int index2) {
