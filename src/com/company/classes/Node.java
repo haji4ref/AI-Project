@@ -3,21 +3,25 @@ package com.company.classes;
 public class Node {
     private String name;
 
-    private int cost;
-
     private int id;
 
-    public Node(String name, int cost) {
+    private String color;
+
+    public Node(String name) {
         this.name = name;
-        this.cost = cost;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public int getCost() {
-        return this.cost;
+    public String getColor() {
+        return color;
+    }
+
+    public Node setColor(String color) {
+        this.color = color;
+        return this;
     }
 
     public int setId(int id) {

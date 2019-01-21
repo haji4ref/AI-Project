@@ -1,17 +1,18 @@
 package com.company.classes;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Graph {
     public int V; // No. of vertices
-    public LinkedList[] adj; //Adjacency Lists
+    public ArrayList<Node>[] adj; //Adjacency Lists
 
     // Constructor
-    public Graph(int v) {
-        this.V = v;
-        this.adj = new LinkedList[v];
-        for (int i = 0; i < v; ++i)
-            this.adj[i] = new LinkedList<Node>();
+    public Graph(int numberOfNodes) {
+        this.V = numberOfNodes;
+        this.adj = new ArrayList[numberOfNodes];
+        for (int i = 0; i < numberOfNodes; ++i)
+            this.adj[i] = new ArrayList<Node>();
     }
 
     // Function to add an edge into the graph
@@ -19,7 +20,4 @@ public class Graph {
         this.adj[v.getId()].add(w);
     }
 
-    public LinkedList<Node> possibleStates(int id) {
-        return this.adj[id];
-    }
 }

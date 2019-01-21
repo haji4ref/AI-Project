@@ -13,11 +13,11 @@ public class MyNodeBuilder {
 
     }
 
-    public static Node instance(String name, int cost) {
+    public static Node instance(String name) {
         if (nodeNames.contains(name)) {
             return nodes.get(nodeNames.indexOf(name));
         } else {
-            Node node = new Node(name, cost);
+            Node node = new Node(name);
 
             node.setId(id++);
 
